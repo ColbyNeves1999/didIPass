@@ -19,7 +19,7 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
   
     // the the name is already in `students` 
       // then return false
-    for(let i = 0; i < students.)
+    //for(let i = 0; i < students.)
     // Calculate the student's current average (use the function previously defined)
   
     const newStudent: Student =  // Create a `Student` object using the `name`, `weights` and `currentAverage`
