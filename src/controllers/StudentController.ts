@@ -12,7 +12,7 @@ function createNewStudent(req: Request, res: Response): void {
     const studentData = req.body as NewStudentRequest;// Assign `req.body` as a `NewStudentRequest`
   
     const didAddStudent = addStudent(studentData);// Call the `addStudent` function using the student's data
-    
+
     if(!didAddStudent){
         res.sendStatus(409);
         return;
@@ -20,7 +20,7 @@ function createNewStudent(req: Request, res: Response): void {
  
     // Send status 201 (This means 201 Created)
     res.sendStatus(201);
-    //res.json(req.body);
+    
 }
  
 function getStudentByName(req: Request, res: Response): void {
