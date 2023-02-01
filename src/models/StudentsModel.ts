@@ -29,9 +29,9 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
 
     return true;
 
-  }
+}
 
-  function getStudent(studentName: string): Student | undefined {
+function getStudent(studentName: string): Student | undefined {
     // If the student's name is not in `students`
       // then return undefined
     if(!(studentName in students)){
@@ -40,6 +40,6 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
     // Return the student's information (their name is the key for `students`)
     return students[studentName];
 
-  }
+}
 
 export { students, addStudent, getStudent };
