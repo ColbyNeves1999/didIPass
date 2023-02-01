@@ -41,3 +41,5 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
     return students[studentName];
 
   }
+
+export { students, addStudent, getStudent };
