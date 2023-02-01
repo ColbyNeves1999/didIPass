@@ -17,14 +17,27 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
     // Destructure the name and weights
     const { name, weights } = newStudentData;
   
-    // the the name is already in `students` 
-      // then return false
-    //for(let i = 0; i < students.)
-    // Calculate the student's current average (use the function previously defined)
-  
-    const newStudent: Student =  // Create a `Student` object using the `name`, `weights` and `currentAverage`
+    if(newStudentData.name in students){
+        return false;
+    }
 
-    // Add the new Student to the `students` object. The student's name is the key
-  
-    // Finally, return true since the student was added
+    const average = calculateAverage(weights);
+
+    const newStudent: Student =  {name: name, weights: weights, currentAverage: average};
+
+    students[newStudent.name] = newStudent;
+
+    return true;
+
+  }
+
+  function getStudent(studentName: string): Student | undefined {
+    // If the student's name is not in `students`
+      // then return undefined
+    if(!(studentName in students)){
+        return undefined;
+    }
+    // Return the student's information (their name is the key for `students`)
+    return students[studentName];
+
   }
