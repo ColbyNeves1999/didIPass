@@ -13,6 +13,7 @@ function createNewStudent(req: Request, res: Response): void {
   
     const didAddStudent = addStudent(studentData);// Call the `addStudent` function using the student's data
 
+    //If the student wasn't added properly then the compile will let you know using 409
     if(!didAddStudent){
         res.sendStatus(409);
         return;
