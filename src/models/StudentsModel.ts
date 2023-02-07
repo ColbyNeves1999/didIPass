@@ -5,12 +5,9 @@ function calculateAverage(weights: CourseGrades): number {
 
     let average: number = 0;
     //loops through the array of grades and adds them to average
-    for(let i = 0; i < weights.assignmentWeights.length; i += 1){
-        average += weights.assignmentWeights[i].grade;
-    }
-
-    //determines the actual average for that student
-    average = average / weights.assignmentWeights.length;
+    for (let i = 0; i < weights.assignmentWeights.length; i += 1) {
+        average += (weights.assignmentWeights[i].grade * weights.assignmentWeights[i].weight) / (100 - weights.finalExamWeight);
+      }
 
     return average;
 
@@ -46,5 +43,10 @@ function getStudent(studentName: string): Student | undefined {
     return students[studentName];
 
 }
+
+function calculateFinalExamScore(currentAverage: number, finalExamWeight: number, targetScore: number): number {
+    // TODO: Calculate the final exam score needed to get the targetScore in the class
+    return 0;
+  }
 
 export { students, addStudent, getStudent };
