@@ -45,8 +45,14 @@ function getStudent(studentName: string): Student | undefined {
 }
 
 function calculateFinalExamScore(currentAverage: number, finalExamWeight: number, targetScore: number): number {
+
     // TODO: Calculate the final exam score needed to get the targetScore in the class
-    return 0;
+    let neededGrade = 0;
+
+    neededGrade = (targetScore - ((1 - finalExamWeight) * currentAverage)) / finalExamWeight;
+
+    return neededGrade;
+
   }
 
 export { students, addStudent, getStudent };
