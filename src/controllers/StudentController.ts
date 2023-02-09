@@ -100,10 +100,10 @@ function calcFinalScore(req: Request, res: Response): void {
   const overallScore = calculateFinalExamScore(average, weight, gradeData.grade); //Calculate the final score that would receive using their current average and the hypothetical final exam grade.
   const letterGrade = getLetterGrade(overallScore);//Get the letter grade they would receive given this score
 
-  // TODO: Send back a JSON response containing their `overallScore` and `letterGrade.
+  //Send back a JSON response containing their `overallScore` and `letterGrade.
   const yourGrade: FinalGrade = {overallScore: overallScore, letterGrade: letterGrade};
   res.json(yourGrade);
   
 }
 
-export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores };
+export { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores, calcFinalScore };

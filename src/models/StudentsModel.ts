@@ -58,7 +58,7 @@ function calculateFinalExamScore(currentAverage: number, finalExamWeight: number
 
 function getLetterGrade(score: number): string {
 
-  // TODO: Return the appropriate letter grade
+  //Return the appropriate letter grade
   if(score >= 90){
     return "A";
   }
