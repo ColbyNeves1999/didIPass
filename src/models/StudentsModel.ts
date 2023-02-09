@@ -53,6 +53,12 @@ function calculateFinalExamScore(currentAverage: number, finalExamWeight: number
 
     return neededGrade;
 
-  }
+}
+  
 
-export { students, addStudent, getStudent };
+function getLetterGrade(score: number): string {
+  // TODO: Return the appropriate letter grade
+   
+}
+
+export { students, addStudent, getStudent, calculateFinalExamScore };

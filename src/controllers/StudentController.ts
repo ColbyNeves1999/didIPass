@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { students, addStudent, getStudent } from '../models/StudentsModel';
+import { students, addStudent, getStudent, calculateFinalExamScore } from '../models/StudentsModel';
 
 function getAllStudents(req: Request, res: Response): void {
   res.json(students);
@@ -41,4 +41,37 @@ function getStudentByName(req: Request, res: Response): void {
     res.json(student);
 }
 
-export default { getAllStudents, createNewStudent, getStudentByName };
+function getFinalExamScores(req: Request, res: Response): void {
+  //Get the student name from the path params
+  const { studentName } = req.params as StudentNameParams;
+  
+  //Get the student's data from the dataset
+  const studentData = getStudent(studentName);
+
+  //If the student was not found
+  //responds with status 404 Not Found
+  //terminate the function
+  if(!studentData){
+    res.sendStatus(404);
+    return;
+  }
+
+  //Get the current average and weights from the student's data
+  const curAvg = studentData.currentAverage;
+
+  let finalNeeded: FinalExamScores = {needForA: 0, needForB: 0, needForC:0, needForD:0};
+  // TODO: Calculate the grade needed on the final to score a 90 in the class (this is the grade needed for an A)
+  finalNeeded.needForA = calculateFinalExamScore(curAvg, 100, 90);
+  // TODO: Calculate the grade needed on the final to score a 80 in the class (this is the grade needed for a B)
+  finalNeeded.needForB = calculateFinalExamScore(curAvg, 100, 80);
+  // TODO: Calculate the grade needed on the final to score a 70 in the class (this is the grade needed for a C)
+  finalNeeded.needForC = calculateFinalExamScore(curAvg, 100, 70);
+  // TODO: Calculate the grade needed on the final to score a 60 in the class (this is the grade needed for a D)
+  finalNeeded.needForD = calculateFinalExamScore(curAvg, 100, 60);
+
+  // TODO: Send a JSON response with an object containing the grades needed for an A through D
+  res.json(finalNeeded);
+  
+}
+
+export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores };
