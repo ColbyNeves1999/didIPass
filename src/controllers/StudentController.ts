@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { students, addStudent, getStudent, calculateFinalExamScore } from '../models/StudentsModel';
+import { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade } from '../models/StudentsModel';
 
 function getAllStudents(req: Request, res: Response): void {
   res.json(students);
@@ -97,10 +97,13 @@ function calcFinalScore(req: Request, res: Response): void {
   const average = student.currentAverage;
   const weight = student.weights.finalExamWeight;
 
-  //const overallScore = calculateFinalExamScore(average, weight, gradeData.grade); // TODO: Calculate the final score that would receive using their current average and the hypothetical final exam grade.
-  //const letterGrade = // TODO: Get the letter grade they would receive given this score
+  const overallScore = calculateFinalExamScore(average, weight, gradeData.grade); //Calculate the final score that would receive using their current average and the hypothetical final exam grade.
+  const letterGrade = getLetterGrade(overallScore);//Get the letter grade they would receive given this score
 
   // TODO: Send back a JSON response containing their `overallScore` and `letterGrade.
+  const yourGrade: FinalGrade = {overallScore: overallScore, letterGrade: letterGrade};
+  res.json(yourGrade);
+  
 }
 
 export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores };

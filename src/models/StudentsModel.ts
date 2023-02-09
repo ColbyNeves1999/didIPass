@@ -76,4 +76,4 @@ function getLetterGrade(score: number): string {
   }
 }
 
-export { students, addStudent, getStudent, calculateFinalExamScore };
+export { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade };
