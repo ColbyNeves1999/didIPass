@@ -58,20 +58,49 @@ function getFinalExamScores(req: Request, res: Response): void {
 
   //Get the current average and weights from the student's data
   const curAvg = studentData.currentAverage;
+  const curWeight = studentData.weights.finalExamWeight;
 
   let finalNeeded: FinalExamScores = {needForA: 0, needForB: 0, needForC:0, needForD:0};
-  // TODO: Calculate the grade needed on the final to score a 90 in the class (this is the grade needed for an A)
-  finalNeeded.needForA = calculateFinalExamScore(curAvg, 100, 90);
-  // TODO: Calculate the grade needed on the final to score a 80 in the class (this is the grade needed for a B)
-  finalNeeded.needForB = calculateFinalExamScore(curAvg, 100, 80);
-  // TODO: Calculate the grade needed on the final to score a 70 in the class (this is the grade needed for a C)
-  finalNeeded.needForC = calculateFinalExamScore(curAvg, 100, 70);
-  // TODO: Calculate the grade needed on the final to score a 60 in the class (this is the grade needed for a D)
-  finalNeeded.needForD = calculateFinalExamScore(curAvg, 100, 60);
+  //Calculate the grade needed on the final to score a 90 in the class (this is the grade needed for an A)
+  finalNeeded.needForA = calculateFinalExamScore(curAvg, curWeight, 90);
+  //Calculate the grade needed on the final to score a 80 in the class (this is the grade needed for a B)
+  finalNeeded.needForB = calculateFinalExamScore(curAvg, curWeight, 80);
+  //Calculate the grade needed on the final to score a 70 in the class (this is the grade needed for a C)
+  finalNeeded.needForC = calculateFinalExamScore(curAvg, curWeight, 70);
+  //Calculate the grade needed on the final to score a 60 in the class (this is the grade needed for a D)
+  finalNeeded.needForD = calculateFinalExamScore(curAvg, curWeight, 60);
 
-  // TODO: Send a JSON response with an object containing the grades needed for an A through D
+  //Send a JSON response with an object containing the grades needed for an A through D
   res.json(finalNeeded);
   
+}
+
+function calcFinalScore(req: Request, res: Response): void {
+  //Get the student name from the path params
+  const { studentName } = req.params as StudentNameParams;
+  
+  //Get the student's data from the dataset
+  const student = getStudent(studentName);
+
+  //If the student was not found
+    //responds with status 404 Not Found
+    //terminate the function
+    if(!student){
+      res.sendStatus(404);
+      return;
+  }
+
+  //Get the grade data from the request body as the `AssignmentGrade` type
+  const gradeData = req.body as AssignmentGrade;
+
+  //Get the current average and weights from the student's data
+  const average = student.currentAverage;
+  const weight = student.weights.finalExamWeight;
+
+  //const overallScore = calculateFinalExamScore(average, weight, gradeData.grade); // TODO: Calculate the final score that would receive using their current average and the hypothetical final exam grade.
+  //const letterGrade = // TODO: Get the letter grade they would receive given this score
+
+  // TODO: Send back a JSON response containing their `overallScore` and `letterGrade.
 }
 
 export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores };

@@ -46,7 +46,7 @@ function getStudent(studentName: string): Student | undefined {
 
 function calculateFinalExamScore(currentAverage: number, finalExamWeight: number, targetScore: number): number {
 
-    // TODO: Calculate the final exam score needed to get the targetScore in the class
+    //Calculate the final exam score needed to get the targetScore in the class
     let neededGrade = 0;
 
     neededGrade = (targetScore - ((1 - finalExamWeight) * currentAverage)) / finalExamWeight;
@@ -57,8 +57,23 @@ function calculateFinalExamScore(currentAverage: number, finalExamWeight: number
   
 
 function getLetterGrade(score: number): string {
+
   // TODO: Return the appropriate letter grade
-   
+  if(score >= 90){
+    return "A";
+  }
+  else if(score >= 80){
+    return "B";
+  }
+  else if(score >= 70){
+    return "C";
+  }
+  else if(score >= 60){
+    return "D";
+  }
+  else{
+    return "F";
+  }
 }
 
 export { students, addStudent, getStudent, calculateFinalExamScore };
