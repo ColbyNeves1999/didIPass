@@ -46,6 +46,5 @@ type GradeUpdateParams = {
     
     studentName: string; 
     assignmentName: string; 
-    newGrade: number;
 
 };

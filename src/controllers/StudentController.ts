@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade } from '../models/StudentsModel';
+import { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade, updateStudentGrade } from '../models/StudentsModel';
 
 function getAllStudents(req: Request, res: Response): void {
   res.json(students);
@@ -85,9 +85,9 @@ function calcFinalScore(req: Request, res: Response): void {
   //If the student was not found
     //responds with status 404 Not Found
     //terminate the function
-    if(!student){
-      res.sendStatus(404);
-      return;
+  if(!student){
+    res.sendStatus(404);
+    return;
   }
 
   //Get the grade data from the request body as the `AssignmentGrade` type
@@ -106,4 +106,29 @@ function calcFinalScore(req: Request, res: Response): void {
   
 }
 
-export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores, calcFinalScore };
+function updateGrade(req: Request, res: Response): void {
+
+  //Get the student's name and assignment name from the path parameters as a `GradeUpdateParams`
+  const { studentName, assignmentName } = req.params as GradeUpdateParams;
+
+  //Get the grade from the request body as an `AssignmentGrade`
+  const studentGrade = req.body as AssignmentGrade;
+
+  //Update the student's grade
+  updateStudentGrade(studentName, assignmentName, studentGrade.grade);
+
+  //If the update did not complete (this means the student or the assignment wasn't found)
+    //respond with status 404 Not Found
+    //terminate the function immediately
+    
+  if(!studentName || !assignmentName){
+    res.sendStatus(404);
+    return;
+  }
+    
+  //Respond with status 200 OK
+  res.sendStatus(200);
+
+}
+
+export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores, calcFinalScore, updateGrade };
