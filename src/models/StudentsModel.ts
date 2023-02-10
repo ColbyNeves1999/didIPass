@@ -100,14 +100,14 @@ function updateStudentGrade( studentName: string, assignmentName: string, newGra
 
 
   //Set the assignment's grade to the newGrade
-  student.weights.assignmentWeights.grade[assignment] = newGrade;
+  student.weights.assignmentWeights[assignment].grade = newGrade;
 
   //Then recalculate the student's currentAverage
   student.currentAverage = calculateAverage(student.weights);
-
+ 
   //return true since the update completed successfully
   return true;
 
 }
 
-export { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade };
+export { students, addStudent, getStudent, calculateFinalExamScore, getLetterGrade, updateStudentGrade };
