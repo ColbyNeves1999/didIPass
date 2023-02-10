@@ -42,4 +42,10 @@ type StudentNameParams = {
     studentName: string;
   };
 
-type GradeUpdateParams = string;
+type GradeUpdateParams = {
+    
+    studentName: string; 
+    assignmentName: string; 
+    newGrade: number;
+
+};
