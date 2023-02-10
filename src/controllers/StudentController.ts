@@ -106,4 +106,4 @@ function calcFinalScore(req: Request, res: Response): void {
   
 }
 
-export { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores, calcFinalScore };
+export default { getAllStudents, createNewStudent, getStudentByName, getFinalExamScores, calcFinalScore };
