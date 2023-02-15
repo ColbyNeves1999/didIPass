@@ -78,7 +78,7 @@ function getLetterGrade(score: number): string {
 
 function updateStudentGrade( studentName: string, assignmentName: string, newGrade: number): boolean {
   //Get the student name from the path params
-  const name:StudentNameParams = {studentName:studentName};
+  const name:StudentNameParams = {studentName};
 
   //Get the student's data from the dataset
   const student = getStudent(name.studentName);
@@ -90,7 +90,7 @@ function updateStudentGrade( studentName: string, assignmentName: string, newGra
   }
 
   //Search the student's `assignmentWeights` and find the assignment with the matching name using the .find() method
-  const assignment = student.weights.assignmentWeights.find((element: string) => element == assignmentName)
+  const assignment = student.weights.assignmentWeights.find((element: { name: string; }) => element.name === assignmentName)
 
   //If the assignment was not found
     //return false
@@ -98,9 +98,8 @@ function updateStudentGrade( studentName: string, assignmentName: string, newGra
     return false;
   }
 
-
   //Set the assignment's grade to the newGrade
-  student.weights.assignmentWeights[assignment].grade = newGrade;
+  assignment.grade = newGrade;
 
   //Then recalculate the student's currentAverage
   student.currentAverage = calculateAverage(student.weights);

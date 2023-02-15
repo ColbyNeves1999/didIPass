@@ -102,7 +102,7 @@ function calcFinalScore(req: Request, res: Response): void {
 
   //Send back a JSON response containing their `overallScore` and `letterGrade.
   const yourGrade: FinalGrade = {overallScore: overallScore, letterGrade: letterGrade};
-  res.json(yourGrade);
+  res.json(yourGrade);  
   
 }
 
@@ -120,7 +120,7 @@ function updateGrade(req: Request, res: Response): void {
   //If the update did not complete (this means the student or the assignment wasn't found)
     //respond with status 404 Not Found
     //terminate the function immediately
-    
+     
   if(!studentName || !assignmentName){
     res.sendStatus(404);
     return;
